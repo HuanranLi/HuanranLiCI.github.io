@@ -46,6 +46,7 @@ https://templatemo.com/tm-531-reflux
             <nav class="main-nav" role="navigation">
               <ul class="main-menu">
                 <li><a href="#section1">About Me</a></li>
+                <li><a href="#section2">Causal Inference Project</a></li>
                 <li><a href="#section5">Contact Me</a></li>
               </ul>
             </nav>
@@ -89,7 +90,7 @@ https://templatemo.com/tm-531-reflux
               >I graduated in both Electrical Engineering and Computer Science
               B.S. at <a href="https://www.wisc.edu/ "> UW-Madison <a/>in 2020 Spring. Then in 2020 Fall, I started to pursuit ECE
               Ph.D. degree advised by Professor <a href="https://danielpimentel.github.io/index.html">Daniel Pimentel-Alarc&oacute;n</a> . My interests include machine learning,
-              signal processing, deep learning, and optimization. I am currently interested in causal inference because it is a great tool to analyze the effect of random allocation of units. 
+              signal processing, deep learning, and optimization. I am actively searching for a internship opportunity. I am currently interested in causal inference because it is a great tool to analyze the effect of random allocation of units. 
               With some raw clinical data in hand, the simple comparison of average scores between groups may not reveal an unbiased estimate of the treatment effect. 
               That's where Causal Inference comes handy, because it is a combination of logical arguments and statistical methods.
               </span
@@ -144,6 +145,43 @@ https://templatemo.com/tm-531-reflux
             </div>
           </div>
         </div>
+      </section>
+      
+      <section class="section project" data-section="section2">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Causal Inference Project</h2>
+            <div class="project">
+            <p align="left">
+            <b>Problem: </b>
+            In this project, we want to know the causal effect of dropping out values from Deep Learning Neural Network. 
+            In particular, we are interested in a multi-layer auto-encoder, whose middle layer has much smaller size than both ends. In general, people use drop-out layers to regularize and avoid overfitting. 
+            Thus, we want to use causal inference to analyze what is the effect of randomly dropping out values from DNN. 
+            This could be helpful to application of DNNs in the real world, because there is a growing concern among the public that Neural Network need to explain how it is able to make decisions. Especially when it comes to
+            Deep learning ethnic topic, neural network need to be trustworthy if people could understand the reason behind its decisions. Besides, knowing the causal effect of drop-out layers would accelerate the training efficiency and robustness of the DNN.
+            </p
+            >
+            <p align="left">
+            <b>Random Variable: </b>
+            For every neural in DNN, we need a random Bernolli variable to decide if we want to pass the value to the next layer.
+            </p
+            >
+            <p align="left">
+            <b>Causal Effect: </b>
+            The treatment effect will be determined by the prediction loss, which is the 2-norm between the predicted and true lable. Since every neuron would have a random variable, the treatment effect would be complicated with huge amount of different treatment combination. Thus, we prefer to group the random variables by the layer order, and compare the 2-norm label difference with different treatment on each layer.
+            </p
+            >
+            <p align="left">
+            <b>working hypotheses: </b>
+            The working hypotheses for this problem is that the DAG should strictly follow the structure of the DNN, that means that every nueron will form a node and every connection between two neuron will form a path in our DAG.
+              </p
+            >
+            </div>
+            
+            
+
+          </div>
+		</div>
       </section>
 
 

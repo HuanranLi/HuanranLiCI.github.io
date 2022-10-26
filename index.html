@@ -153,31 +153,28 @@ https://templatemo.com/tm-531-reflux
             <h2>Causal Inference Project</h2>
             <div class="project">
             <p align="left">
-            <b>Problem: </b>
-            In this project, we want to know the causal effect of dropping out values from Deep Learning Neural Network. 
-            In particular, we are interested in a multi-layer auto-encoder, whose middle layer has much smaller size than both ends. In general, people use drop-out layers to regularize and avoid overfitting. 
-            Thus, we want to use causal inference to analyze what is the effect of randomly dropping out values from DNN. 
+            In this project, we want to know the causal effect of dropping out values from the input of the Deep Learning Neural Network. 
+            In particular, we are interested in a multi-layer feed-forward classifier, which takes the input of an vector and generate the probability of the input catagorized in a sepecific type. 
+            During the training of the Neural Network, there are two places where we can randomly dropping out values in order to make the model more robust to the real-world input and noise.
+            First, people use drop-out layers to regularize and avoid overfitting. This can be considered the same technique as the Ridge Regression, where the norm of the weight is also limited.
+            Second, dropping out values from the input starts to receive more attentions as the semi-supervised learning is studied. This is what I am interested for this project.
+            We want to use causal inference to analyze what is the effect of randomly dropping out values from the input of DNN. 
             This could be helpful to application of DNNs in the real world, because there is a growing concern among the public that Neural Network need to explain how it is able to make decisions. Especially when it comes to
-            Deep learning ethnic topic, neural network need to be trustworthy if people could understand the reason behind its decisions. Besides, knowing the causal effect of drop-out layers would accelerate the training efficiency and robustness of the DNN.
+            Deep learning ethnic topic, neural network need to be trustworthy if people could understand the reason behind its decisions. Besides, knowing the causal effect of dropping values would accelerate the training efficiency and robustness of the DNN.
             </p
             >
             <p align="left">
-            <b>Random Variable: </b>
-            For every neural in DNN, we need a random Bernolli variable to decide if we want to pass the value to the next layer.
-            </p
+            Specifically, we use MNIST as our experimental dataset, which contains images of handwritten figures from 0 to 9. To input the data into the network, the image matrices are vectorized before feed into the network. There will be 10 final nodes each indicate the probability of the input is a certain figure class. To study the effect of missing values, we divide the image into several sub-area with the same size. We randomly delete the values from one sub-area for each trial of the experiment. Then comparing the classification accuracy.
+            For sub-area, we would like to use one random Bernolli variable for each pixel. The value of the random Bernolli variable will decide whether this pixel is deleted or not. The treatment effect will be determined by the prediction loss, which is the 2-norm between the predicted and true lable. The working hypotheses for this problem is that the DAG should strictly follow the structure of the DNN, that means that every nueron will form a node and every connection between two neuron will form a path in our DAG (refer the following graph).</p
             >
-            <p align="left">
-            <b>Causal Effect: </b>
-            The treatment effect will be determined by the prediction loss, which is the 2-norm between the predicted and true lable. Since every neuron would have a random variable, the treatment effect would be complicated with huge amount of different treatment combination. Thus, we prefer to group the random variables by the layer order, and compare the 2-norm label difference with different treatment on each layer.
-            </p
-            >
-            <p align="left">
-            <b>working hypotheses: </b>
-            The working hypotheses for this problem is that the DAG should strictly follow the structure of the DNN, that means that every nueron will form a node and every connection between two neuron will form a path in our DAG.
-              </p
-            >
-            </div>
             
+            <p align="left">
+            Before the experiment, there are several assumptions that need to be made in order to a causal estimand. For each Bernolli variable, we assume that when applying random value deletion, the probability must be kept between 0 and 1. That is, 0 < P(x) < 1. In addition, we assume the exchangability, that is assuming that the potential outcomes are independent from the treatment assignment.
+            </p
+            >
+            
+            <img src="assets/images/feed_forward_neural_network-1.gif" alt="" />
+            </div>
             
 
           </div>

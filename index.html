@@ -163,17 +163,35 @@ https://templatemo.com/tm-531-reflux
             Deep learning ethnic topic, neural network need to be trustworthy if people could understand the reason behind its decisions. Besides, knowing the causal effect of dropping values would accelerate the training efficiency and robustness of the DNN.
             </p
             >
+            <img src="assets/images/MNIST.png" alt="" />
             <p align="left">
             Specifically, we use MNIST as our experimental dataset, which contains images of handwritten figures from 0 to 9. To input the data into the network, the image matrices are vectorized before feed into the network. There will be 10 final nodes each indicate the probability of the input is a certain figure class. To study the effect of missing values, we divide the image into several sub-area with the same size. We randomly delete the values from one sub-area for each trial of the experiment. Then comparing the classification accuracy.
             For sub-area, we would like to use one random Bernolli variable for each pixel. The value of the random Bernolli variable will decide whether this pixel is deleted or not. The treatment effect will be determined by the prediction loss, which is the 2-norm between the predicted and true lable. The working hypotheses for this problem is that the DAG should strictly follow the structure of the DNN, that means that every nueron will form a node and every connection between two neuron will form a path in our DAG (refer the following graph).</p
             >
             
+            <img src="assets/images/feed_forward_neural_network-1.gif" alt="" />
+            
             <p align="left">
-            Before the experiment, there are several assumptions that need to be made in order to a causal estimand. For each Bernolli variable, we assume that when applying random value deletion, the probability must be kept between 0 and 1. That is, 0 < P(x) < 1. In addition, we assume the exchangability, that is assuming that the potential outcomes are independent from the treatment assignment.
+            Before the experiment, there are several assumptions that need to be made in order to a causal estimand. For each Bernolli variable, we assume that when applying random value deletion, the probability must be kept between 0 and 1. That is, 0 < P(x) < 1. In addition, we assume the exchangability, that is assuming that the potential outcomes are independent from the treatment assignment. Furthermore, we also assumes consistancy, markov campatibility and causal irrelevance for the following identification proof.
+            In this experiment, our intervention (denote l) is on the picture input of the network. For the second layer, each node will be a function of l (denote as X^1_i(l)). Similarly, for the third layer, each ndoe will be denoted as X^2_i(l). And finally for the output layer, the node will be denoted as y(l). With this notation in mind, we want to identify: E[Y(l) | X^1(l) = x].
+            </p
+            >
+            <p align="left">
+            By Consistancy, E[Y(l) | X^1(l) = x] = E[Y(l,x) | X^1(l) = x]. <br>
+            By Markov compatibility, we know that Y(l,x) is independent of X(l), thus
+            E[Y(l) | X^1(l) = x] = E[Y(l,x)]. <br>
+            With this in mind, by causal irrelevance, E[Y(l,x)] = E[Y(x)]. <br>
+            By Markov compatibility,
+            E[Y(x)] = E[Y(x) | X^1 = x]. <br>
+            Finally with consistancy,
+            E[Y(x) | X^1 = x] = E[Y|X^1 = x]. <br>
             </p
             >
             
-            <img src="assets/images/feed_forward_neural_network-1.gif" alt="" />
+            <p align="left">
+            With the identification proof, what we conclude is that  E[Y(l) | X^1(l) = x] = E[Y|X^1 = x]. That means we dropped the dependence on the random variable l to find the expectation of our target identification. This enables us to calculate this term with our experimental results in the following project.
+            </p
+            >
             </div>
             
 
